@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">基础使用</string>
 
     <!-- activity_main -->
@@ -23,6 +25,5 @@
     <!--  acticity2_intent -->
     <string name="webView1">显示Intent+WebView</string>
     <string name="webView2">隐示Intent+WebView</string>
-
 
 </resources>

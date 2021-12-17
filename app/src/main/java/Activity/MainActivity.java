@@ -1,11 +1,16 @@
-package com.example.activity;
+package Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.activity.R;
+
+
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
             //停止状态：不可见，单对象存在
             //死亡状态：对象不存在
         //2、Activity的生命周期
-            //onCreate()    加载布局和初始化的工作
-            //onStart()
-            //onResume()    只有经历此方法，才能进入运行状态
-            //onPause()
-            //onStop()
-            //onRestart()
-            //onDestroy()   在对象死亡前，进行一些清理工作
+            //onCreate()    当Activity第一次被创建时调用，加载布局和初始化的工作
+            //onStart()     当用户可以看到这个Activity时调用
+            //onResume()    当获得用户的焦点时，就是用户点击了屏幕，只有经历此方法，才能进入运行状态
+            //onPause()     当系统准备启动或者恢复另一个活动时调用
+            //onStop()      当活动完全不可见时调用，若新启动的活动是对话框形式，则该方法不会被调用
+            //onRestart()   当活动有停止状态变为运行状态时调用
+            //onDestroy()   活动被销毁时调用，在对象死亡前，进行一些清理工作
 
 
         //TaskStack和LaunchMode
@@ -63,6 +68,44 @@ public class MainActivity extends AppCompatActivity {
             //3).singeTask      只有一个实例，默认在当前Task中
             //4).singleInstance 只有一个实例，创建时会创建新的栈，且此栈中不能有其他对象
 
+
+        //跳转PopupWindow、DialogAlert的使用界面
+        Button btn1 = (Button)findViewById(R.id.btn1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //显示Intent
+                startActivity(new Intent(MainActivity.this, DialogActivity.class));
+            }
+        });
+
+        //Intent的使用
+        Button btn2 = (Button)findViewById(R.id.btn2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //显示Intent
+                startActivity(new Intent(MainActivity.this, IntentActivity.class));
+            }
+        });
+
+        //ListView的使用
+        Button btn3 = (Button)findViewById(R.id.btn3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ListviewActivity.class));
+            }
+        });
+
+        //RecyclerView的使用
+        Button btn4 = (Button)findViewById(R.id.btn4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,IntentActivity.class));
+            }
+        });
 
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arr">
+        <item>a</item>
+        <item>1</item>
+        <item>b</item>
+        <item>3</item>
+        <item>c</item>
+        <item>5</item>
+        <item>d</item>
+        <item>7</item>
+        <item>e</item>
+        <item>9</item>
+        <item>f</item>
+        <item>11</item>
+        <item>g</item>
+        <item>13</item>
+        <item>h</item>
+        <item>15</item>
+        <item>i</item>
+        <item>17</item>
+    </string-array>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JiChuUse</string>
+
+    <!-- activity_main -->
+    <string name="tanChuangShiYong">TanChuangUse</string>
+    <string name="intentShiYong">IntentUse</string>
+    <string name="ListViewShiYong">ListViewUse</string>
+    <string name="RecyclerViewShiYong">RecyclerViewUse</string>
+
+    <!-- activity_dialog -->
+    <string name="popupWindowShiYong">PopupWindowUse</string>
+    <string name="alertDialogShiYong">AlertDialogUse</string>
+
+    <!-- activity_content -->
+    <string name="xuanXiang">Option</string>
+    <string name="xuanXiang1">Option1</string>
+    <string name="xuanXiang2">Option2</string>
+
+    <!-- acticity_intent -->
+    <string name="intentXianShi">IntentXianshiUse</string>
+    <string name="intentYinShi">IntentYinshiUse</string>
+
+    <!--  acticity2_intent -->
+    <string name="webView1">WebView1</string>
+    <string name="webView2">WebView2</string>
+
+
+</resources>
