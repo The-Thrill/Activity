@@ -60,8 +60,6 @@ public class MyArrayAdapter extends BaseAdapter {
             //在convertView不为空时，直接获取绑定的ViewHolder
             listViewHolder = (ListViewHolder) convertView.getTag();
         }
-        //将所在position设置为id
-        //listBean.get(position).setTitle(String.valueOf(position));
         //装载对应的数据源
         listViewHolder.setBean(listBean.get(position));
 

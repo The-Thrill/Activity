@@ -49,12 +49,6 @@ public class ListViewHolder {
      */
     private void deployData() {
         textView.setText(bean.getTitle());
-        layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, bean.getTitle() + "", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
 
