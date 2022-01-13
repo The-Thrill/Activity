@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import Activity.ListViewHolder;
 import Bean.ListBean;
 
 import com.example.activity.R;
@@ -18,7 +17,6 @@ public class MyArrayAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<ListBean> listBean;
-    private int mSelect;   //选中项
 
     public MyArrayAdapter(Context context, List<ListBean> mList) {
         this.context = context;
@@ -53,7 +51,8 @@ public class MyArrayAdapter extends BaseAdapter {
             //convertView为null时，重新获取一遍资源
             convertView = inflater.inflate(R.layout.item_listiew, null);
             //实例化一次ViewHolder
-            listViewHolder = new ListViewHolder(context, convertView);
+            listViewHolder = new ListViewHolder();
+            listViewHolder.textView = (TextView) convertView.findViewById(R.id.item_tv);
             //将ViewHolder与convertView绑定，下次使用时无须再次实例化
             convertView.setTag(listViewHolder);
         } else {
@@ -61,9 +60,13 @@ public class MyArrayAdapter extends BaseAdapter {
             listViewHolder = (ListViewHolder) convertView.getTag();
         }
         //装载对应的数据源
-        listViewHolder.setBean(listBean.get(position));
+        listViewHolder.textView.setText(listBean.get(position).getTitle());
 
         return convertView;
+    }
+
+    static class ListViewHolder{
+        TextView textView;
     }
 
 }

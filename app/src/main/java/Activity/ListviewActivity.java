@@ -1,34 +1,33 @@
 package Activity;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.ContentView;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import Adapter.MyArrayAdapter;
 import Bean.ListBean;
+import Utils.LogUtils;
 
-public class ListviewActivity extends Activity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener, AbsListView.OnScrollListener{
+public class ListviewActivity extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener, AbsListView.OnScrollListener{
 
     private static final String TAG = "ListviewActivity";
     private ListView listView;
     private List<ListBean> listBeans;
     private MyArrayAdapter adapter;
+    private Button top,flash,down,add;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +36,10 @@ public class ListviewActivity extends Activity implements AdapterView.OnItemClic
 
         //1、获取ListView
         listView = (ListView)findViewById(R.id.listview);
+        top = (Button)findViewById(R.id.top);
+        flash = (Button)findViewById(R.id.flash);
+        down = (Button)findViewById(R.id.down);
+        add = (Button)findViewById(R.id.add);
         //2、创建适配器对象
         String[] data = getResources().getStringArray(R.array.arr);//模拟网络数组数据
         listBeans = new ArrayList<ListBean>();
@@ -53,13 +56,18 @@ public class ListviewActivity extends Activity implements AdapterView.OnItemClic
         listView.setOnItemLongClickListener(this);
         listView.setOnScrollListener(this);
 
+        top.setOnClickListener(this);
+        flash.setOnClickListener(this);
+        down.setOnClickListener(this);
+        add.setOnClickListener(this);
+
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(ListviewActivity.this,"点击了"+listBeans.get(position).getTitle(),Toast.LENGTH_SHORT).show();
-        Log.e(TAG, "点击了: ----------------"+listBeans.get(position).getTitle());
+        LogUtils.i(TAG, "点击了: ----------------"+listBeans.get(position).getTitle());
     }
 
     @Override
@@ -67,34 +75,62 @@ public class ListviewActivity extends Activity implements AdapterView.OnItemClic
         Toast.makeText(ListviewActivity.this,"长按删除"+listBeans.get(position).getTitle(),Toast.LENGTH_SHORT).show();
         listBeans.remove(position);
         adapter.notifyDataSetChanged();
-        Log.e(TAG, "长按删除: ----------------"+listBeans.get(position).getTitle());
+        LogUtils.i(TAG, "长按删除: ----------------"+listBeans.get(position).getTitle());
         return true; //返回false会和点击监听冲突，只监听长按设置true
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (scrollState == SCROLL_STATE_FLING) {  //滑动
-            Toast.makeText(ListviewActivity.this,"滑动",Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "滑动: ----------------");
-        }else if (scrollState == SCROLL_STATE_IDLE) {   //停止
-            Toast.makeText(ListviewActivity.this,"停止",Toast.LENGTH_SHORT).show();
-            //模拟添加数据
-            ListBean listBean = new ListBean();
-            listBean.setTitle("nihao");
-            listBeans.add(listBean);
-            adapter.notifyDataSetChanged();
-            Log.e(TAG, "停止: ----------------");
+        if (scrollState == SCROLL_STATE_FLING) {  //惯性滑动，用力快速滑动时可监听到此值
+            LogUtils.i(TAG, "SCROLL_STATE_FLING: ----------------惯性滑动");
+        }else if (scrollState == SCROLL_STATE_IDLE) {   //停止，不滚动时的状态，通常会在滚动停止时监听到此状态
+            LogUtils.i(TAG, "SCROLL_STATE_IDLE: ----------------停止");
+            // 判断滚动到底部
+            if (listView.getLastVisiblePosition() == (listView.getCount() - 1)) {
+                LogUtils.i(TAG, "SCROLL_STATE_IDLE: ----------------底部");
+            }
 
-        }else if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {   //手指离开
-            Toast.makeText(ListviewActivity.this,"手指离开",Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "手指离开: ----------------");
+            // 判断滚动到顶部
+            if(listView.getFirstVisiblePosition() == 0){
+                LogUtils.i(TAG, "SCROLL_STATE_IDLE: ----------------顶部");
+            }
+
+        }else if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {   //滑动，正在滚动的状态
+            LogUtils.i(TAG, "SCROLL_STATE_TOUCH_SCROLL: ----------------滑动");
         }
     }
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
+        LogUtils.i(TAG,firstVisibleItem+"   firstVisibleItem");//第一条可见条目
+        LogUtils.i(TAG,visibleItemCount+"   visibleItemCount");//当前可见条目
+        LogUtils.i(TAG,visibleItemCount+"   totalItemCount");//总体条目
     }
 
 
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.top:
+                listView.setSelection(0);
+                adapter.notifyDataSetInvalidated(); //清空所有信息，重新布局
+                break;
+            case R.id.flash:
+                adapter.notifyDataSetChanged(); //保存刷新前位置
+                break;
+            case R.id.down:
+                listView.setSelection(listView.getCount()-1);
+                adapter.notifyDataSetInvalidated(); //清空所有信息，重新布局
+                break;
+            case R.id.add:
+                ListBean listBean = new ListBean();
+                listBean.setTitle(""+listView.getCount());
+                listBeans.add(listBean);
+                adapter.notifyDataSetChanged(); //保存刷新前位置
+                break;
+
+        }
+
+    }
 }

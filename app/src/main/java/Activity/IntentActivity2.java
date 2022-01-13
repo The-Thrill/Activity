@@ -1,7 +1,6 @@
 package Activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,10 +11,11 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
 
-public class IntentActivity2 extends Activity {
+public class IntentActivity2 extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override

@@ -1,7 +1,5 @@
 package Activity;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,10 +15,12 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
 
-public class DialogActivity extends Activity {
+public class DialogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,9 +124,9 @@ public class DialogActivity extends Activity {
 
     //设置遮罩
     private void bgAlpha(Context context, float alpha) {
-        WindowManager.LayoutParams lp = ((Activity) context).getWindow().getAttributes();
+        WindowManager.LayoutParams lp = ((AppCompatActivity) context).getWindow().getAttributes();
         lp.alpha = alpha;// 0.0-1.0
-        ((Activity) context).getWindow().setAttributes(lp);
+        ((AppCompatActivity) context).getWindow().setAttributes(lp);
     }
 
 }

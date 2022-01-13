@@ -1,13 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listview"
+    <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:text="title"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/line"/>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/top"
+        android:text="顶部"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/layout"
+        android:layout_above="@+id/flash"
+        />
+
+    <Button
+        android:id="@+id/flash"
+        android:text="刷新"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/layout"
+        android:layout_centerVertical="true"
+        />
+
+    <Button
+        android:id="@+id/down"
+        android:text="底部"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/layout"
+        android:layout_below="@id/flash"
+        />
+
+    <Button
+        android:id="@+id/add"
+        android:text="添加"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/layout"
+        android:layout_below="@id/down"
+        />
 
 
-
-</LinearLayout>
+</RelativeLayout>
