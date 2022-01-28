@@ -12,6 +12,7 @@
         android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:textAllCaps="false"
         android:text="@string/popupWindowShiYong"/>
 
@@ -21,5 +22,12 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="@string/alertDialogShiYong"/>
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="ProgressDialog的使用"/>
 
 </LinearLayout>

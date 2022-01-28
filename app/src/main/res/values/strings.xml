@@ -6,6 +6,24 @@
     <string name="intentShiYong">Intent使用</string>
     <string name="ListViewShiYong">ListView使用</string>
     <string name="RecyclerViewShiYong">RecyclerView使用</string>
+    <string name="notification">Notification使用</string>
+    <string name="handler">Handler使用</string>
+    <string name="touchEvent">TouchEvent使用</string>
+    <string name="configuration">Configuration使用</string>
+    <string name="asyncTask">AsyncTask使用</string>
+    <string name="service">Service使用</string>
+    <string name="startService">startService使用</string>
+    <string name="stopService">stopService使用</string>
+    <string name="bindService">bindService使用</string>
+    <string name="unbindService">unbindService使用</string>
+    <string name="intentService">IntentService使用</string>
+    <string name="broadcastReceiver">BroadcastReceiver使用</string>
+    <string name="sendBroadcast">BroadcastReceiver静态使用</string>
+    <string name="registerReceiver">BroadcastReceiver动态使用</string>
+    <string name="contentProvider">ContentProvider使用</string>
+    <string name="fragment">Fragment使用</string>
+    <string name="sqlite">SQLite使用</string>
+    <string name="http">HTTP使用</string>
 
     <!-- activity_dialog -->
     <string name="popupWindowShiYong">PopupWindow的使用</string>

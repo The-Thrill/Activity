@@ -1,7 +1,10 @@
 package Activity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -40,6 +43,10 @@ public class ListviewActivity extends AppCompatActivity implements View.OnClickL
         flash = (Button)findViewById(R.id.flash);
         down = (Button)findViewById(R.id.down);
         add = (Button)findViewById(R.id.add);
+        //动态获取表头和表尾
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View header = layoutInflater.inflate(R.layout.view_header,null);
+        View footer = layoutInflater.inflate(R.layout.view_footer,null);
         //2、创建适配器对象
         String[] data = getResources().getStringArray(R.array.arr);//模拟网络数组数据
         listBeans = new ArrayList<ListBean>();
@@ -49,6 +56,16 @@ public class ListviewActivity extends AppCompatActivity implements View.OnClickL
             listBeans.add(listBean);
         }
         adapter = new MyArrayAdapter(ListviewActivity.this, listBeans);
+        //添加表头和表尾
+        listView.addHeaderView(header);
+        listView.addFooterView(footer);
+        //设置列表从底部开始
+        listView.setStackFromBottom(true);
+        //设置分割线
+        listView.setDivider(new ColorDrawable(Color.GRAY));
+        listView.setDividerHeight(1);
+        //隐藏滑动条（android:scrollbars="none"）
+        listView.setVerticalScrollBarEnabled(false);
         //3、加载适配器
         listView.setAdapter(adapter);
         //4、设置监听

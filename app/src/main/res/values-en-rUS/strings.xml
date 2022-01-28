@@ -7,6 +7,24 @@
     <string name="intentShiYong">IntentUse</string>
     <string name="ListViewShiYong">ListViewUse</string>
     <string name="RecyclerViewShiYong">RecyclerViewUse</string>
+    <string name="notification">NotificationUse</string>
+    <string name="handler">HandlerUse</string>
+    <string name="touchEvent">TouchEventUse</string>
+    <string name="configuration">ConfigurationUse</string>
+    <string name="asyncTask">AsyncTaskUse</string>
+    <string name="service">ServiceUse</string>
+    <string name="startService">startServiceUse</string>
+    <string name="stopService">stopServiceUse</string>
+    <string name="bindService">bindServiceUse</string>
+    <string name="unbindService">unbindServiceUse</string>
+    <string name="intentService">IntentServiceUse</string>
+    <string name="broadcastReceiver">BroadcastReceiverUse</string>
+    <string name="sendBroadcast">sendBroadcastUse</string>
+    <string name="registerReceiver">registerReceiverUse</string>
+    <string name="contentProvider">ContentProviderUse</string>
+    <string name="fragment">FragmentUse</string>
+    <string name="sqlite">SQLiteUse</string>
+    <string name="http">HTTPUse</string>
 
     <!-- activity_dialog -->
     <string name="popupWindowShiYong">PopupWindowUse</string>

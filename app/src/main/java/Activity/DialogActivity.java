@@ -1,5 +1,6 @@
 package Activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.BitmapDrawable;
@@ -117,6 +118,42 @@ public class DialogActivity extends AppCompatActivity {
                         });
                 //显示
                 builder.show();
+            }
+        });
+
+        //ProgressDialog的使用
+        Button btn3 = (Button)findViewById(R.id.btn3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog progressDialog = new ProgressDialog(DialogActivity.this);
+                progressDialog.setTitle("软件更新中");                   //设置标题,
+                progressDialog.setMessage("软件正在更新中,请稍后...");     //设置内容
+                progressDialog.setCancelable(false);                   //设置是否用取消按钮关闭
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);  //设置进度条的风格,HORIZONTAL是水平进度条,SPINNER是圆形进度条
+                progressDialog.setIndeterminate(true);                 //设置水平进度条是否运动
+                progressDialog.setProgress(10);                        //设置进度条数值
+                progressDialog.setSecondaryProgress(20);               //设置二级进度条数值
+                progressDialog.setButton(ProgressDialog.BUTTON_POSITIVE,"OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE,"Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                progressDialog.setButton(ProgressDialog.BUTTON_NEUTRAL,"neutral", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                progressDialog.show();                                 //显示
+
             }
         });
 
