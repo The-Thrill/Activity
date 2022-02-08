@@ -17,7 +17,18 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "MyDBOpenHelper";
 
-    public MyDBOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    //SQLiteOpenHelper 工具类
+    //2、对外提供函数---单例模式
+    private static SQLiteOpenHelper mInstance;
+    public static synchronized SQLiteOpenHelper getInstance(Context context) {
+        if(mInstance == null) {
+            mInstance = new MyDBOpenHelper(context,"test.db", null,1);
+        }
+        return mInstance;
+    }
+
+    //1、构造函数私有化
+    private MyDBOpenHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
@@ -25,13 +36,14 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         LogUtils.i(TAG, "MyDBOpenHelper------onCreate()");
-        db.execSQL("CREATE TABLE person(personid INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20))");
+        //主键标准为下划线开头,类型为 integer, 其他类型为 text
+        db.execSQL("create table persons(_id integer primary key autoincrement, name text)");
     }
 
     //软件版本号发生改变时调用
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         LogUtils.i(TAG, "MyDBOpenHelper------onUpgrade()");
-        db.execSQL("ALTER TABLE person ADD phone VARCHAR(12)");
+//        db.execSQL("ALTER TABLE person ADD phone VARCHAR(12)");
     }
 }

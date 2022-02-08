@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn0"
-        android:text="create"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn1"
@@ -20,23 +14,38 @@
 
     <Button
         android:id="@+id/btn2"
-        android:text="insert"
+        android:text="queryAll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn3"
-        android:text="update"
+        android:text="insert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn4"
+        android:text="update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn5"
         android:text="delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn6"
+        android:text="deleteAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false" />
+
 
 </LinearLayout>

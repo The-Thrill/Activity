@@ -221,7 +221,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
         //创建Retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.wanandroid.com/")
-                .callFactory(new OkHttpClient.Builder()
+                .callFactory((okhttp3.Call.Factory) new OkHttpClient.Builder()
                         .cookieJar(new CookieJar() {
                             @Override
                             public void saveFromResponse(@NonNull HttpUrl httpUrl, @NonNull List<Cookie> list) {

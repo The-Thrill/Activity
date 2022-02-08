@@ -80,6 +80,7 @@
         <activity android:name="Activity.RetrofitActivity" />
         <activity android:name="Activity.RxActivity" />
         <activity android:name="Activity.SharedPreferenceActivity" />
+        <activity android:name="Activity.RoomActivity" />
 
         <!-- service start -->
         <service

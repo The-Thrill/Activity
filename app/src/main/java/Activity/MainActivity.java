@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.example.activity.R;
 
@@ -174,12 +175,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, RxActivity.class));
                 break;
             case R.id.btn18:
-                //S使用
+                //SharedPreference使用
                 startActivity(new Intent(MainActivity.this, SharedPreferenceActivity.class));
                 break;
             case R.id.btn19:
-                //使用
-//                startActivity(new Intent(MainActivity.this, SharedPreferenceActivity.class));
+                //Room使用
+                startActivity(new Intent(MainActivity.this, RoomActivity.class));
                 break;
 
 
