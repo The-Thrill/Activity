@@ -2,21 +2,22 @@ package App;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.ComponentCallbacks;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.tencent.mmkv.MMKV;
 
 public class MyApplication extends Application {
 
     private static final String TAG = "MyApplication";
     private static MyApplication myApplication;
     private Context context;
+    private static MMKV mmkv;
 
     public static MyApplication getInstance() {
         return myApplication;
@@ -41,6 +42,18 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //MMKV初始化
+        //MMKV 的默认根目录（files/mmkv/）/data/user/0/项目包名/files/mmkv
+        String rootDir = MMKV.initialize(this);
+        //修改目录
+//        String dir = getFilesDir().getAbsolutePath() + "/mmkv_1";
+//        String rootDir = MMKV.initialize(dir);
+        //使用默认的实例
+//        mmkv = MMKV.defaultMMKV();
+        //创建自己的实例  参数1：库的key， 参数2：库的模式（多进程或单进程）
+//        MMKV mmkv2 = MMKV.mmkvWithID("user", MMKV.MULTI_PROCESS_MODE);
+
     }
 
 

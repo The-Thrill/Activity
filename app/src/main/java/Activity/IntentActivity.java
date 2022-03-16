@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
 
+import Utils.LogUtils;
+
 public class IntentActivity extends AppCompatActivity {
 
     //Intent的理解
@@ -36,7 +38,7 @@ public class IntentActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acticity_intent);
-
+        LogUtils.i("TAG","bbbb"+getTaskId());
 
         //显示Intent
         Button btn1 = (Button)findViewById(R.id.btn1);

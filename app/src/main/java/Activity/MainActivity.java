@@ -11,6 +11,8 @@ import androidx.room.Room;
 
 import com.example.activity.R;
 
+import Utils.LogUtils;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -113,7 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn2:
                 //Intent的使用
-                startActivity(new Intent(MainActivity.this, IntentActivity.class));
+                LogUtils.i("TAG","ccccc"+getTaskId());
+                Intent intent = new Intent(getApplicationContext(), IntentActivity.class);
+                //若想用getApplicationContext启动，则需要指定Flags类型，新开启的Activity仍在同一个栈内
+                //若要开启新栈，则需要在AndroidManiFest中设置开启的Activity的 taskAffinity
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.btn3:
                 //ListView的使用

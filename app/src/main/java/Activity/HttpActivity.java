@@ -39,6 +39,7 @@ import okhttp3.Response;
 
 public class HttpActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //应用层(http)-传输层(Socket\TCP/IP)-网络层(IP)-数据链路层-物理层
     //http协议的定义  hypertext transfer protocol（超文本传输协议）
     //TCP/IP协议的一个应用层协议，用于定义WEB浏览器与WEB服务器之间交换数据的过程。
     //客户端连上web服务器后，若想获得web服务器中的某个web资源，需遵守一定的通讯格式，HTTP协议用于定义客户端与web服务器通迅的格式。

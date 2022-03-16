@@ -89,6 +89,9 @@ public class MyFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         LogUtils.i(TAG, "------onDestroyView()");
+        if (root != null) {
+            ((ViewGroup) root.getParent()).removeView(root);
+        }
     }
 
     @Override

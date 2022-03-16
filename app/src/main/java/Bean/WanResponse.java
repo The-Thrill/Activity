@@ -4,8 +4,11 @@ package Bean;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class WanResponse {
+import java.io.Serializable;
 
+public class WanResponse implements Serializable {
+
+    private static final long serialVersionUID = 3540015569786464591L;
     private Data data;
     private int errorCode;
     private String errorMsg;

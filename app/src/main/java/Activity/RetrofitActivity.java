@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.tencent.mmkv.MMKV;
 
 import org.reactivestreams.Publisher;
 
@@ -23,13 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Bean.WanResponse2;
 import Bean.WanResponse;
 import Interface.HttpbinService;
 import Interface.UploadService;
 import Interface.WanAndroidService;
 import Utils.LogUtils;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -51,7 +51,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "RetrofitActivity";
-    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
     private Retrofit retrofit;
     private HttpbinService httpbinService;
     private Map<String, List<Cookie>> map = new HashMap<>();
@@ -70,6 +70,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
         btn6 = findViewById(R.id.btn6);
         btn7 = findViewById(R.id.btn7);
         btn8 = findViewById(R.id.btn8);
+        btn9 = findViewById(R.id.btn9);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
@@ -78,6 +79,7 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
         btn6.setOnClickListener(this);
         btn7.setOnClickListener(this);
         btn8.setOnClickListener(this);
+        btn9.setOnClickListener(this);
 
         //创建Retrofit对象
         retrofit = new Retrofit.Builder()
@@ -113,6 +115,9 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn8:
                 dwonloadRxJava();
+                break;
+            case R.id.btn9:
+                getMMKV();
                 break;
 
         }
@@ -177,8 +182,16 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    WanResponse wanResponse = new Gson().fromJson(response.body().string(), WanResponse.class);
+                    //使用Serializable序列化
+//                    WanResponse wanResponse = new Gson().fromJson(response.body().string(), WanResponse.class);
+                    //使用Parcelable序列化
+                    WanResponse2 wanResponse = new Gson().fromJson(response.body().string(), WanResponse2.class);
                     LogUtils.i(TAG, "loginGson wanResponse：" + wanResponse);
+                    MMKV mmkv = MMKV.defaultMMKV();
+                    assert mmkv != null;
+                    mmkv.encode("data",wanResponse);
+                    LogUtils.i(TAG, "MMKV encode：" + wanResponse);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -189,6 +202,14 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+    }
+
+
+    private void getMMKV() {
+        MMKV mmkv = MMKV.defaultMMKV();
+        assert mmkv != null;
+        WanResponse2 wanResponse2 = mmkv.decodeParcelable("data",WanResponse2.class);
+        LogUtils.i(TAG, "MMKV decodeParcelable：" + wanResponse2);
     }
 
     private void loginGsonConverter() {

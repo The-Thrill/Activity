@@ -150,6 +150,7 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
         Bundle bundle = new Bundle();
         bundle.putString("msg", "fragment");
         fragment.setArguments(bundle);
+        //getSupportFragmentManager()主要用于支持 3.0以下android系统API版本，3.0以上系统可以直接调用getFragmentManager()
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fl_fragment,fragment);

@@ -20,9 +20,32 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
     //SQLiteOpenHelper 工具类
     //2、对外提供函数---单例模式
     private static SQLiteOpenHelper mInstance;
+    //同步方法模式的线程安全
     public static synchronized SQLiteOpenHelper getInstance(Context context) {
         if(mInstance == null) {
             mInstance = new MyDBOpenHelper(context,"test.db", null,1);
+        }
+        return mInstance;
+    }
+
+    //同步代码块模式的线程安全
+    public static  SQLiteOpenHelper getInstance1(Context context) {
+        synchronized(MyDBOpenHelper.class) {
+            if(mInstance == null) {
+                mInstance = new MyDBOpenHelper(context,"test.db", null,1);
+            }
+            return mInstance;
+        }
+    }
+
+    //效率更高的懒汉式单例模式的线程安全
+    public static  SQLiteOpenHelper getInstance2(Context context) {
+        if(mInstance == null) {
+            synchronized(MyDBOpenHelper.class) {
+                if(mInstance == null) {
+                    mInstance = new MyDBOpenHelper(context,"test.db", null,1);
+                }
+            }
         }
         return mInstance;
     }

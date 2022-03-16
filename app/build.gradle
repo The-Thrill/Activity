@@ -62,4 +62,11 @@ dependencies {
     //log4j
     implementation files('libs/android-logging-log4j-1.0.3.jar')
     implementation files('libs/log4j-1.2.17.jar')
+
+    //MMKV
+    implementation 'com.tencent:mmkv-static:1.2.9'
+
+    //LeakCanary
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:2.3'
 }

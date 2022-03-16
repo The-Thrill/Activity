@@ -76,6 +76,7 @@ public class SharedPreferenceActivity extends AppCompatActivity implements View.
                 //保存
                 editor.putString("武功", "九阳神功");
                 //apply()才会写入
+                //apply没有返回值而commit返回boolean表明修改是否提交成功
                 editor.apply();
                 break;
             case R.id.btn2:

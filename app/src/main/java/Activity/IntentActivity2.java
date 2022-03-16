@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -17,6 +18,8 @@ import com.example.activity.R;
 
 public class IntentActivity2 extends AppCompatActivity {
 
+    private WebView webView;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +29,7 @@ public class IntentActivity2 extends AppCompatActivity {
         boolean type = bundle.getBoolean("type",true);
 
         TextView textView = (TextView)findViewById(R.id.tv);
-        WebView webView = (WebView)findViewById(R.id.webView);
+        webView = (WebView)findViewById(R.id.webView);
         if(type) {
             textView.setText(getResources().getText(R.string.webView1));
             //webView
@@ -37,10 +40,12 @@ public class IntentActivity2 extends AppCompatActivity {
             webSettings.setDomStorageEnabled(true);
             String url = "https://www.baidu.com";
             webView.loadUrl(url);
+            //设置不用系统浏览器打开,直接显示在当前webView
             webView.setWebViewClient(new WebViewClient(){
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                    return false;
+                    view.loadUrl(request.getUrl().toString());
+                    return true;
                 }
             });
         }else {
@@ -50,5 +55,18 @@ public class IntentActivity2 extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (webView != null) {
+            webView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            webView.clearHistory();
+
+            ((ViewGroup) webView.getParent()).removeView(webView);
+            webView.destroy();
+            webView = null;
+        }
+        super.onDestroy();
     }
 }

@@ -17,6 +17,7 @@ import Utils.LogUtils;
 public class MyFragment2 extends Fragment {
 
     private static final String TAG = "MyFragment2";
+    private View root;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -33,8 +34,10 @@ public class MyFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LogUtils.i(TAG, "onCreateView()");
-        View view = inflater.inflate(R.layout.fragment_my2, container, false);
-        return view;
+        if(root == null){
+            root = inflater.inflate(R.layout.fragment_my2, container, false);
+        }
+        return root;
     }
 
     @Override
@@ -65,6 +68,9 @@ public class MyFragment2 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         LogUtils.i(TAG, "onDestroyView()");
+        if (root != null) {
+            ((ViewGroup) root.getParent()).removeView(root);
+        }
     }
 
     @Override

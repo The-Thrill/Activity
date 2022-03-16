@@ -1,11 +1,13 @@
 package Bean;
 
-import java.io.Serializable;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Data implements Serializable {
+public class Data2 implements Parcelable {
 
-    private static final long serialVersionUID = -3743706067035563807L;
     private boolean admin;
     private List<String> chapterTops;
     private int coinCount;
@@ -19,6 +21,33 @@ public class Data implements Serializable {
     private String token;
     private int type;
     private String username;
+
+    protected Data2(Parcel in) {
+        admin = in.readByte() != 0;
+        chapterTops = in.createStringArrayList();
+        coinCount = in.readInt();
+        email = in.readString();
+        icon = in.readString();
+        id = in.readLong();
+        nickname = in.readString();
+        password = in.readString();
+        publicName = in.readString();
+        token = in.readString();
+        type = in.readInt();
+        username = in.readString();
+    }
+
+    public static final Creator<Data2> CREATOR = new Creator<Data2>() {
+        @Override
+        public Data2 createFromParcel(Parcel in) {
+            return new Data2(in);
+        }
+
+        @Override
+        public Data2[] newArray(int size) {
+            return new Data2[size];
+        }
+    };
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
@@ -141,5 +170,26 @@ public class Data implements Serializable {
                 ", type=" + type +
                 ", username='" + username + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (admin ? 1 : 0));
+        dest.writeStringList(chapterTops);
+        dest.writeInt(coinCount);
+        dest.writeString(email);
+        dest.writeString(icon);
+        dest.writeLong(id);
+        dest.writeString(nickname);
+        dest.writeString(password);
+        dest.writeString(publicName);
+        dest.writeString(token);
+        dest.writeInt(type);
+        dest.writeString(username);
     }
 }

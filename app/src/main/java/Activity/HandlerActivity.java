@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,6 +38,7 @@ public class HandlerActivity extends AppCompatActivity {
     //5、在构造Handler实例时，我们会重写handleMessage方法，也就是msg.target.dispatchMessage(msg)最终调用的方法。
 
     private TextView textView;
+    private MyHandler myHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,22 +62,29 @@ public class HandlerActivity extends AppCompatActivity {
                 //为Message设置Bundle数据
                 msg.setData(bundle);
                 //发送消息
-                handler.sendMessage(msg);
+                myHandler.sendMessage(msg);
 
             }
         }, 0,1000);
     }
 
-    @SuppressLint("HandlerLeak")
-    Handler handler = new Handler(){
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            String s = msg.getData().getString("time");
-            if(msg.what == 0) {
-                textView.setText(s);
-            }
+//
+    private static class MyHandler extends Handler {
+
+        //静态内部类+弱引用，避免内存溢出
+        private WeakReference<HandlerActivity> weakReference;
+
+        public MyHandler(HandlerActivity activity) {
+            weakReference = new WeakReference<>(activity);
         }
-    };
+
+    @Override
+    public void handleMessage(@NonNull Message msg) {
+        super.handleMessage(msg);
+        String s = msg.getData().getString("time");
+            if(msg.what == 0) {
+                weakReference.get().textView.setText(s);
+            }
+    }
+}
 }
