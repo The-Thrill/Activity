@@ -9,19 +9,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.activity.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import Bean.ListBean;
 import Interface.OnItemClickListener;
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
 
-    private List<ListBean> pdata = new ArrayList<ListBean>();
+    private List<String> pdata = new ArrayList<>();
     private Context context;
+    private RecyclerView recyclerView;
     private MyViewHolder myViewHolder;
     //创建单机回调接口
     private OnItemClickListener onItemClickListener;
@@ -30,14 +33,23 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         this.onItemClickListener = onItemClickListener;
     }
 
-    public MyRecyclerViewAdapter(List<ListBean> pdata, Context context) {
-        this.pdata = pdata;
+    public MyRecyclerViewAdapter(Context context, RecyclerView recyclerView) {
         this.context = context;
-
+        this.recyclerView = recyclerView;
     }
+
+    public void setPdata(List<String> pdata){
+        this.pdata = pdata;
+        notifyDataSetChanged();
+    }
+
+    private int getRandomHeight() {
+        return (int) (Math.random()*1000);
+    }
+
+    //返回一个自定义的ViewHolder，创建ViewHolder并返回，后续item布局里的控件都是从ViewHolder里面取出
     @NonNull
     @Override
-    //返回一个自定义的ViewHolder，创建ViewHolder并返回，后续item布局里的控件都是从ViewHolder里面取出
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //填充布局，获取列表项布局
         View view = LayoutInflater.from(context).inflate(R.layout.item_recyclerview,parent,false);
@@ -45,11 +57,19 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         return myViewHolder;
     }
 
-    @Override
     //填充onCreateViewHolder方法返回的holder中的控件，通过方法提供ViewHolder，将数据绑定到ViewHolder
+    @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //获取数据
-        holder.textView.setText(pdata.get(position).getTitle());
+        holder.textView.setText(pdata.get(position));
+        //瀑布流处理
+        if(recyclerView.getLayoutManager().getClass() == StaggeredGridLayoutManager.class) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getRandomHeight());
+            holder.textView.setLayoutParams(params);
+        }else {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            holder.textView.setLayoutParams(params);
+        }
 
         View view = ((LinearLayout)holder.itemView).getChildAt(0);
         if(onItemClickListener != null){
@@ -62,8 +82,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    @Override
     //返回数据个数
+    @Override
     public int getItemCount() {
         return pdata.size();
     }

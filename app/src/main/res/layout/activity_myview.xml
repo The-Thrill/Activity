@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ln="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View.TestView
+        android:id="@+id/testView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        ln:test_boolean="true"
+        ln:test_dimension="100dp"
+        ln:test_enum="bottom"
+        ln:test_integer="10086"
+        ln:test_string="test"/>
+
+    <View.RoundProgressBar
+        android:id="@+id/progress"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        ln:radius="40dp"/>
+
+</RelativeLayout>
+
+
+
+
+
+

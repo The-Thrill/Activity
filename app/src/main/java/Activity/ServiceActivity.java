@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.activity.R;
+import com.example.myservice2.IMyAidlInterface;
 
 import Service.MyService;
 import Service.MyService2;
@@ -47,7 +49,7 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
     //Service的终止，需要unbindService和stopService都调用才行
 
     private static final String TAG = "ServiceActivity";
-    private Button btn1, btn2, btn3, btn4, btn5, btn6;
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10;
     private Intent it1, it2, it3;
 
     @Override
@@ -61,6 +63,10 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         btn4 = (Button) findViewById(R.id.btn4);
         btn5 = (Button) findViewById(R.id.btn5);
         btn6 = (Button) findViewById(R.id.btn6);
+        btn7 = (Button) findViewById(R.id.btn7);
+        btn8 = (Button) findViewById(R.id.btn8);
+        btn9 = (Button) findViewById(R.id.btn9);
+        btn10 = (Button) findViewById(R.id.btn10);
 
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -68,6 +74,10 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         btn4.setOnClickListener(this);
         btn5.setOnClickListener(this);
         btn6.setOnClickListener(this);
+        btn7.setOnClickListener(this);
+        btn8.setOnClickListener(this);
+        btn9.setOnClickListener(this);
+        btn10.setOnClickListener(this);
 
         it1 = new Intent(this, MyService3.class);
         Bundle b1 = new Bundle();
@@ -116,6 +126,28 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
                     startService(it2);
                     startService(it3);
                     break;
+                case R.id.btn7:
+                    //远程开启服务, Android5.0以后要显式声明
+                    Intent i1 = new Intent("com.example.myservice2.service");
+                    i1.setPackage("com.example.myservice2");
+                    startService(i1);
+                    break;
+                case R.id.btn8:
+                    //远程关闭服务
+                    Intent i2 = new Intent("com.example.myservice2.service");
+                    i2.setPackage("com.example.myservice2");
+                    stopService(i2);
+                    break;
+                case R.id.btn9:
+                    //远程绑定服务
+                    Intent i3 = new Intent("com.example.myservice2.service");
+                    i3.setPackage("com.example.myservice2");
+                    bindService(i3,serviceConnection2,BIND_AUTO_CREATE);
+                    break;
+                case R.id.btn10:
+                    //远程解绑服务
+                    unbindService(serviceConnection2);
+                    break;
             }
         }
     }
@@ -135,6 +167,30 @@ public class ServiceActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         public void onServiceDisconnected(ComponentName name) {
             LogUtils.i(TAG, "bindService()------Service DisConnected-------");
+        }
+
+    };
+
+    //AIDL
+    private final ServiceConnection serviceConnection2 = new ServiceConnection() {
+
+        //Activity与Service连接成功时回调该方法
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder iBinder) {
+            LogUtils.i(TAG, "AIDL------Service Connected-------");
+            IMyAidlInterface iMyAidlInterface = IMyAidlInterface.Stub.asInterface(iBinder);
+            try {
+                iMyAidlInterface.getProgress();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        //Activity与Service断开连接时回调该方法
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtils.i(TAG, "AIDL------Service DisConnected-------");
         }
 
     };

@@ -23,7 +23,7 @@
         android:id="@+id/btn3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:text="@string/bindService"/>
 
@@ -45,10 +45,41 @@
         android:id="@+id/btn6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:text="@string/intentService"/>
 
+
+
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:text="AIDL远程开启服务"/>
+
+    <Button
+        android:id="@+id/btn8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="AIDL远程关闭服务"/>
+
+    <Button
+        android:id="@+id/btn9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="AIDL远程绑定服务"/>
+
+
+    <Button
+        android:id="@+id/btn10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="AIDL远程解绑服务"/>
 
 
 </LinearLayout>

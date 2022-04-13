@@ -36,8 +36,11 @@ public class IntentActivity2 extends AppCompatActivity {
             WebSettings webSettings = webView.getSettings();
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
             webSettings.setAllowContentAccess(true);
-            webSettings.setJavaScriptEnabled(true);
+            webSettings.setJavaScriptEnabled(true);//支持JS
             webSettings.setDomStorageEnabled(true);
+            webSettings.setSupportZoom(true);//设置缩放
+            webSettings.setBuiltInZoomControls(true);//设置内置的缩放控件
+            webSettings.setDisplayZoomControls(true);//是否隐藏原生的缩放控件
             String url = "https://www.baidu.com";
             webView.loadUrl(url);
             //设置不用系统浏览器打开,直接显示在当前webView
@@ -55,6 +58,18 @@ public class IntentActivity2 extends AppCompatActivity {
             startActivity(intent);
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        webView.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        webView.onResume();
     }
 
     @Override

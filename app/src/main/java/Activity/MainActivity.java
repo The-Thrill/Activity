@@ -17,7 +17,8 @@ import Utils.LogUtils;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10,
-            btn11, btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19;
+            btn11, btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19, btn20,
+            btn21, btn22;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn17 = (Button)findViewById(R.id.btn17);
         btn18 = (Button)findViewById(R.id.btn18);
         btn19 = (Button)findViewById(R.id.btn19);
+        btn20 = (Button)findViewById(R.id.btn20);
+        btn21 = (Button)findViewById(R.id.btn21);
+        btn22 = (Button)findViewById(R.id.btn22);
 
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
@@ -104,6 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn17.setOnClickListener(this);
         btn18.setOnClickListener(this);
         btn19.setOnClickListener(this);
+        btn20.setOnClickListener(this);
+        btn21.setOnClickListener(this);
+        btn22.setOnClickListener(this);
     }
 
     @Override
@@ -160,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn12:
                 //ContentProvider的使用
+                startActivity(new Intent(MainActivity.this, ContentProviderActivity.class));
                 break;
             case R.id.btn13:
                 //Fragment的使用
@@ -189,8 +197,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Room使用
                 startActivity(new Intent(MainActivity.this, RoomActivity.class));
                 break;
-
-
+            case R.id.btn20:
+                //Glide使用
+                startActivity(new Intent(MainActivity.this, GlideActivity.class));
+                break;
+            case R.id.btn21:
+                //Animation使用
+                startActivity(new Intent(MainActivity.this, AnimationActivity.class));
+                break;
+            case R.id.btn22:
+                //自定义View使用
+                startActivity(new Intent(MainActivity.this, MyViewActivity.class));
+                break;
         }
     }
 }

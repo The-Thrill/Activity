@@ -11,6 +11,34 @@
         <entry key="..\:/AndroidStudioProjects/Activity/app/src/main/res/layout/dialog_activity.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidStudioProjects/Activity/app/src/main/res/layout/item_listiew.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidStudioProjects/Activity/app/src/main/res/layout/popup_content.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/drawable/btn_bg_skip.xml" value="0.207" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/drawable/btn_theme.xml" value="0.1405" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1405" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/drawable/tab_bottom.xml" value="0.1405" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout-port/activity_glide.xml" value="0.17447916666666666" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/acticity_sqlite.xml" value="0.264" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_animation.xml" value="0.24094202898550723" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_content_provider.xml" value="0.15364583333333334" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_contentprovider.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_dialog.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_flash.xml" value="0.16822916666666668" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_listview.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_main.xml" value="0.2418478260869565" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_myview.xml" value="0.1" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_recyclerview.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_room.xml" value="0.2418478260869565" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_service.xml" value="0.24456521739130435" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_splash.xml" value="0.15" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/activity_touch_event.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/item_recyclerview.xml" value="0.16304347826086957" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/jpush_inapp_banner.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/jpush_popwin_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/jpush_webview_layout.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/push_notification.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/push_notification_large.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/app/src/main/res/layout/push_notification_middle.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/admin/Desktop/Android-master/Android/myservice2/src/main/res/layout/activity_main.xml" value="0.24456521739130435" />
       </map>
     </option>
   </component>

@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.activity">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取手机 -->
-    <permission android:name="android.permission.CHANGE_CONFIGURATION" /> <!-- 横竖屏及语言切换 -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Required -->
+    <permission
+        android:name="com.example.activity.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.activity.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <permission android:name="android.permission.CHANGE_CONFIGURATION" />
 
     <application
         android:name="App.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/AppTheme2"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/AppTheme1">
 
+        <activity
+            android:name="Activity.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="Activity.MainActivity"
             android:configChanges="locale"
@@ -26,11 +54,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -49,8 +72,8 @@
         <activity
             android:name="Activity.IntentActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:taskAffinity="android.task.browser"/> //注意这里的 taskAffinity
+            android:taskAffinity="android.task.browser"
+            android:windowSoftInputMode="adjustPan" /> <!-- 注意这里的 taskAffinity -->
         <activity
             android:name="Activity.IntentActivity2"
             android:screenOrientation="portrait" />
@@ -75,6 +98,9 @@
         <activity android:name="Activity.AsyncTaskActivity" />
         <activity android:name="Activity.ServiceActivity" />
         <activity android:name="Activity.BroadcastReceiverActivity" />
+        <activity
+            android:name="Activity.ContentProviderActivity"
+            tools:ignore="Instantiatable" />
         <activity android:name="Activity.FragmentActivity" />
         <activity android:name="Activity.SQLiteActivity" />
         <activity android:name="Activity.HttpActivity" />
@@ -82,6 +108,9 @@
         <activity android:name="Activity.RxActivity" />
         <activity android:name="Activity.SharedPreferenceActivity" />
         <activity android:name="Activity.RoomActivity" />
+        <activity android:name="Activity.GlideActivity" />
+        <activity android:name="Activity.AnimationActivity" />
+        <activity android:name="Activity.MyViewActivity" />
 
         <!-- service start -->
         <service
@@ -95,9 +124,7 @@
         <service
             android:name="Service.MyService3"
             android:enabled="true"
-            android:exported="true" />
-        <!-- service end -->
-
+            android:exported="true" /> <!-- service end -->
         <!-- BroadcastReceiver start -->
         <receiver
             android:name="BroadcastReceiver.MyBRReceiver2"
@@ -106,10 +133,46 @@
             <intent-filter>
                 <action android:name="com.example.activity.test" />
             </intent-filter>
+        </receiver> <!-- BroadcastReceiver end -->
+        <!-- JPush_config_start -->
+        <!-- Since JCore2.0.0 Required SDK核心功能 -->
+        <!-- 可配置android:process参数将Service放在其他进程中；android:enabled属性不能是false -->
+        <!-- 这个是自定义Service，要继承极光JCommonService，可以在更多手机平台上使得推送通道保持的更稳定 -->
+        <service
+            android:name="Service.PushService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service> <!-- Required since 3.0.7 -->
+        <!-- 新的 tag/alias 接口结果返回需要开发者配置一个自定的广播 -->
+        <!-- 3.3.0开始所有事件将通过该类回调 -->
+        <!-- 该广播需要继承 JPush 提供的 JPushMessageReceiver 类, 并如下新增一个 Intent-Filter -->
+        <receiver
+            android:name="BroadcastReceiver.PushMessageReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
 
-        </receiver>
-        <!-- BroadcastReceiver end -->
+                <category android:name="com.example.activity" />
+            </intent-filter>
+        </receiver> <!-- jpush_config_end -->
+        <!-- Required_config -->
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="developer-default" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="27605109664311b9b33da523" />
 
+        <provider
+            android:name="ContentProvider.MyContentProvider"
+            android:authorities="com.example.myprovider"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

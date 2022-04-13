@@ -43,5 +43,14 @@
     <!--  acticity2_intent -->
     <string name="webView1">显示Intent+WebView</string>
     <string name="webView2">隐示Intent+WebView</string>
+    <string name="add_data">添加数据</string>
+    <string name="switch_theme">切换布局</string>
+    <string name="add_one_data">插入一条数据</string>
+    <string name="delete_one_data">删除一条数据</string>
+    <string name="down">下载到内部存储</string>
+    <string name="load">加载</string>
+    <string name="glide">glide</string>
+    <string name="glideapp">glideApp</string>
+    <string name="tiaoguo">跳过</string>
 
 </resources>

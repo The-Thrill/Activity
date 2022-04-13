@@ -3,9 +3,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        //noinspection JcenterRepositoryObsolete
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
 rootProject.name = "Activity"
 include ':app'
 include ':lib'
+include ':myservice'
+include ':myservice2'

@@ -12,16 +12,12 @@ import androidx.annotation.Nullable;
 
 import com.tencent.mmkv.MMKV;
 
+import Utils.LogUtils;
+import cn.jpush.android.api.JPushInterface;
+
 public class MyApplication extends Application {
 
     private static final String TAG = "MyApplication";
-    private static MyApplication myApplication;
-    private Context context;
-    private static MMKV mmkv;
-
-    public static MyApplication getInstance() {
-        return myApplication;
-    }
 
     //(1).getContext():获取到当前对象的上下文。
     //(2).getApplication():获得Application的对象
@@ -43,6 +39,12 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+//        //激活JPush
+        JPushInterface.init(this);
+        JPushInterface.setDebugMode(true);
+        LogUtils.i(TAG, "JPushInterface.init++++++++++++++");
+
+
         //MMKV初始化
         //MMKV 的默认根目录（files/mmkv/）/data/user/0/项目包名/files/mmkv
         String rootDir = MMKV.initialize(this);
@@ -58,51 +60,51 @@ public class MyApplication extends Application {
 
 
     //这两个方法用于注册或者注销对APP内所有Activity的生命周期监听，当APP内Activity的生命周期发生变化的时候就会调用ActivityLifecycleCallbacks里面的方法
-    @Override
-    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
-        super.registerActivityLifecycleCallbacks(callback);
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-                Log.e(TAG,"onActivityCreated: " + activity.getLocalClassName());
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-                Log.e(TAG,"onActivityStarted: " + activity.getLocalClassName());
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-                Log.e(TAG,"onActivityResumed: " + activity.getLocalClassName());
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-                Log.e(TAG,"onActivityPaused: " + activity.getLocalClassName());
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-                Log.e(TAG, "onActivityStopped: " + activity.getLocalClassName());
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                Log.e(TAG,"onActivityDestroyed: " + activity.getLocalClassName());
-            }
-        });
-
-    }
-
-    @Override
-    public void unregisterActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
-        super.unregisterActivityLifecycleCallbacks(callback);
-    }
+//    @Override
+//    public void registerActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+//        super.registerActivityLifecycleCallbacks(callback);
+//        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+//            @Override
+//            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+////                Log.e(TAG,"onActivityCreated: " + activity.getLocalClassName());
+//            }
+//
+//            @Override
+//            public void onActivityStarted(Activity activity) {
+//                Log.e(TAG,"onActivityStarted: " + activity.getLocalClassName());
+//            }
+//
+//            @Override
+//            public void onActivityResumed(Activity activity) {
+//                Log.e(TAG,"onActivityResumed: " + activity.getLocalClassName());
+//            }
+//
+//            @Override
+//            public void onActivityPaused(Activity activity) {
+//                Log.e(TAG,"onActivityPaused: " + activity.getLocalClassName());
+//            }
+//
+//            @Override
+//            public void onActivityStopped(Activity activity) {
+//                Log.e(TAG, "onActivityStopped: " + activity.getLocalClassName());
+//            }
+//
+//            @Override
+//            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+//            }
+//
+//            @Override
+//            public void onActivityDestroyed(Activity activity) {
+//                Log.e(TAG,"onActivityDestroyed: " + activity.getLocalClassName());
+//            }
+//        });
+//
+//    }
+//
+//    @Override
+//    public void unregisterActivityLifecycleCallbacks(ActivityLifecycleCallbacks callback) {
+//        super.unregisterActivityLifecycleCallbacks(callback);
+//    }
 
 
     //重写此方法可以监听APP一些配置信息的改变事件（如屏幕旋转等），当配置信息改变的时候会调用这个方法
